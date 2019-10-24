@@ -8,15 +8,18 @@ using UnityEditor;
 public class In_CanonInterface : Editor
 {
     SerializedProperty shootOriginProperty;
-    SerializedProperty delayBetweenShotsProperty, damagesProperty, projectileProperty;
-
-    bool foldout;
+    SerializedProperty delayBetweenShotsProperty, damagesProperty, projectileProperty, paternProperty;
+    Sc_CanonsPart mySelectedScript;
+    bool foldoutShootOrigin;
+    bool foldoutPatern;
     private void OnEnable()
     {
+        Sc_CanonsPart mySelectedScript = target as Sc_CanonsPart;
         delayBetweenShotsProperty = serializedObject.FindProperty("delayBetweenShots");
         damagesProperty = serializedObject.FindProperty("damages");
         projectileProperty = serializedObject.FindProperty("projectile");
         shootOriginProperty = serializedObject.FindProperty("shootOrigin");
+        paternProperty = serializedObject.FindProperty("patern");
     }
 
     public override void OnInspectorGUI()
@@ -35,13 +38,14 @@ public class In_CanonInterface : Editor
         #endregion
 
         EditorGUILayout.PropertyField(projectileProperty);
-
+     
+        
         shootOriginProperty.arraySize = EditorGUILayout.IntField("Shoot Origin Elements", shootOriginProperty.arraySize);
 
         if (shootOriginProperty.arraySize > 0)
         {
-            foldout = EditorGUILayout.Foldout(foldout, " Display Elements", true);
-            if (foldout)
+            foldoutShootOrigin = EditorGUILayout.Foldout(foldoutShootOrigin, "ShootOrigin", true);
+            if (foldoutShootOrigin)
             {
                 for (int i = 0; i < shootOriginProperty.arraySize; i++)
                 {
@@ -52,6 +56,24 @@ public class In_CanonInterface : Editor
             }
             serializedObject.ApplyModifiedProperties();
         }
+
+        EditorGUILayout.PropertyField(damagesProperty);
+
+        if (paternProperty != null)
+        {
+            foldoutPatern = EditorGUILayout.Foldout(foldoutPatern, "PaternElement", true);
+            if(foldoutPatern)
+            {
+                for (int i = 0; i < mySelectedScript.patern.patern.Length; i++)
+                {
+                   /* SerializedProperty currentElement = mySelectedScript.patern.patern[i];
+                    EditorGUILayout.PropertyField(currentElement);*/
+                }
+                EditorGUI.indentLevel -= 2;
+            }
+        }
+
+    
 
     }
 }

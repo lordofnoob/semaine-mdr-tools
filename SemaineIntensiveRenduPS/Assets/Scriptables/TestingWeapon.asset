@@ -22,7 +22,8 @@ MonoBehaviour:
   damages: 3
   projectile: {fileID: 309498266553758758, guid: 68e4052bb30e0a9478f88a8213a85016,
     type: 3}
-  pattern: []
   shootOrigin:
-  - positionTowardShip: {x: 1, y: 0, z: 1}
-    rotationTowardShip: 0
+  - positionTowardShip: {x: -1, y: 0, z: 1}
+    rotationTowardShip: -90
+  patern: {fileID: 11400000, guid: e52de476955421743b8fe0da59547a32, type: 2}
+  speedOfBullets: 0

@@ -8,8 +8,9 @@ public class Sc_CanonsPart : Sc_ShipPart
     public float delayBetweenShots;
     public float damages;
     public Mb_MovingItem projectile;
-    public Vector3[] pattern;
     public shootOrigin[] shootOrigin;
+    public Sc_PatternWay patern;
+    public float speedOfBullets;
 
 }
 

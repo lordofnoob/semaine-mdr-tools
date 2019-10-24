@@ -5,10 +5,9 @@ using UnityEngine;
 public class Mb_MovingItem : MonoBehaviour
 {
     [HideInInspector] public bool used=false;
-    public Sc_PatternWay movingProps;
+    public Sc_PatternWay paternOfMoving;
     public float speed;
     public float damages;
-
     private Vector3 placeToGo;
     private int currentIndex=0;
     private Vector3 velocity = Vector3.zero;
@@ -17,8 +16,13 @@ public class Mb_MovingItem : MonoBehaviour
 
     private void Awake()
     {
+        if (transform.rotation.y==0)
+        {
+            transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 360, 0));
+        }
         startPos = transform.position;
-        placeToGo = startPos+movingProps.patern[currentIndex];
+        placeToGo = Quaternion.AngleAxis(transform.rotation.y, Vector3.up) *(startPos +paternOfMoving.patern[currentIndex]);
+        Debug.Log(placeToGo);
     }
 
     private void Update()
@@ -34,10 +38,12 @@ public class Mb_MovingItem : MonoBehaviour
     public void GoToNextPoint()
     {
         currentIndex += 1;
-        if (movingProps.patern.Length <= currentIndex)
+        if (paternOfMoving.patern.Length <= currentIndex)
             currentIndex = 0;
+ 
         startPos = transform.position;
-        placeToGo = transform.position+ movingProps.patern[currentIndex];
-       
+        Debug.Log(currentIndex);
+        placeToGo = Quaternion.AngleAxis(transform.rotation.y, Vector3.up) * (startPos + paternOfMoving.patern[currentIndex]);
+
     }
 }

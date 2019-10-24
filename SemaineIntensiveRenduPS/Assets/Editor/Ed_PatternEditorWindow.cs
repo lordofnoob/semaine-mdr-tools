@@ -35,9 +35,19 @@ public class Ed_PatternEditorWindow : Editor
             {
                 for (int i = 0; i < targetBehaviour.patern.Length; i++)
                 {
-                    Vector3 pos = new Vector3(Mathf.Round(targetBehaviour.patern[i].x * 10.0f) * 0.1f,0, Mathf.Round(targetBehaviour.patern[i].z * 10.0f) * 0.1f);
-                    targetBehaviour.patern[i] = Handles.FreeMoveHandle(pos, Quaternion.identity, HandleUtility.GetHandleSize(targetBehaviour.transform.position) * 0.5f, Vector3.one * 0.1f, Handles.SphereHandleCap);
-                    Handles.Label(targetBehaviour.patern[i] + Vector3.one, new GUIContent(i.ToString()), EditorStyles.boldLabel);
+                    if (i == 0)
+                    {
+                        Vector3 pos = new Vector3(0, 0, 0);
+                        targetBehaviour.patern[i] = Handles.FreeMoveHandle(pos, Quaternion.identity, HandleUtility.GetHandleSize(targetBehaviour.transform.position) * 0.5f, Vector3.one * 0.1f, Handles.SphereHandleCap);
+                        Handles.Label(targetBehaviour.patern[i] + Vector3.one, new GUIContent(i.ToString()), EditorStyles.boldLabel);
+                    }
+                    else
+                    {
+                        Vector3 pos = new Vector3(Mathf.Round(targetBehaviour.patern[i].x * 10.0f) * 0.1f, 0, Mathf.Round(targetBehaviour.patern[i].z * 10.0f) * 0.1f);
+                        targetBehaviour.patern[i] = Handles.FreeMoveHandle(pos, Quaternion.identity, HandleUtility.GetHandleSize(targetBehaviour.transform.position) * 0.5f, Vector3.one * 0.1f, Handles.SphereHandleCap);
+                        Handles.Label(targetBehaviour.patern[i] + Vector3.one, new GUIContent(i.ToString()), EditorStyles.boldLabel);
+                    }
+               
                 }
                 Handles.color = Color.red;
                 Handles.DrawPolyLine(targetBehaviour.patern);

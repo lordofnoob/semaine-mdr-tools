@@ -16,16 +16,4 @@ public class Sc_ShipCharacteristics : ScriptableObject
     public float totalShipSpeed;
     public float totalDashCooldown;
     public float totalDashRange;
-
-    /*
-    public void CalculateNewCharacteristics()
-    {
-        for (int i = 0; i < allShipParts.Length; i++)
-        {
-            totalHitPoints += allShipParts[i].partCharacteristics.hitPointModifier;
-            totalShipSpeed += allShipParts[i].partCharacteristics.DashCooldownModifier;
-            totalDashCooldown += allShipParts[i].partCharacteristics.DashCooldownModifier;
-            totalDashRange += allShipParts[i].partCharacteristics.DashRangeModifier;
-        }
-    }*/
 }

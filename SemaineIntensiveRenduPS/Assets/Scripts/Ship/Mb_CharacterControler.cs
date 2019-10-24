@@ -55,7 +55,6 @@ public class Mb_CharacterControler : MonoBehaviour
        else if (desiredposition.z > -Sc_GameOptions.maxZ && Input.GetAxis("Vertical") < 0)
             desiredposition += new Vector3(0, 0, Input.GetAxis("Vertical") * shipCharacteritics.totalShipSpeed * Time.deltaTime);
     }
-    
     void Shoot()
     {
         for (int i = 0; i < shipCharacteritics.weapons.Count; i++)       
@@ -64,8 +63,14 @@ public class Mb_CharacterControler : MonoBehaviour
             {
                 for (int j = 0; j < shipCharacteritics.weapons[i].shootOrigin.Length; j++)
                 {
-                    Mb_PoolManager.PoolManager.CallItem( Mb_Poolable.poolableTag.bullet , transform.position + shipCharacteritics.weapons[i].shootOrigin[j].positionTowardShip,  shipCharacteritics.weapons[i].shootOrigin[j].rotationTowardShip);
+                    Mb_PoolManager.PoolManager.CallItem( Mb_Poolable.poolableTag.bullet ,
+                    transform.position + shipCharacteritics.weapons[i].shootOrigin[j].positionTowardShip,
+                    shipCharacteritics.weapons[i].shootOrigin[j].rotationTowardShip);
+
+                    //application des paramètres du canon sur le MonoBehaviour du projectile
+                    shipCharacteritics.weapons[i].projectile.speed = shipCharacteritics.weapons[i].speedOfBullets;
                     shipCharacteritics.weapons[i].projectile.damages = shipCharacteritics.weapons[i].damages;
+                    shipCharacteritics.weapons[i].projectile.paternOfMoving = shipCharacteritics.weapons[i].patern;
                 } 
                 weaponCanShoot[i] = false;
                 StartCoroutine(ShootCooldown(shipCharacteritics.weapons[i].delayBetweenShots, i));
@@ -77,7 +82,6 @@ public class Mb_CharacterControler : MonoBehaviour
         yield return new WaitForSeconds(delayBetweenShot);
         weaponCanShoot[numListe] = true;
     }
-
     void Dash()
     {
         canDash = false;
