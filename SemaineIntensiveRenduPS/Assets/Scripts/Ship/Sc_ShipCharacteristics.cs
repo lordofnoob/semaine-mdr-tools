@@ -9,7 +9,6 @@ public class Sc_ShipCharacteristics : ScriptableObject
 
     [Header("Fight")]
     public float totalHitPoints;
-    public List<Sc_CanonsPart> weapons;
 
 
     [Header("Movement")]

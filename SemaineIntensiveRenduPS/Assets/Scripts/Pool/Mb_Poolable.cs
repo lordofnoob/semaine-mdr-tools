@@ -9,7 +9,7 @@ public class Mb_Poolable : MonoBehaviour
 
     public enum poolableTag
     {
-        bullet,enemy,obstacle,Fx
+        bullet,boss,enemy,obstacle,Fx,collectible
     }
 }
 

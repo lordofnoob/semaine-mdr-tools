@@ -11,7 +11,6 @@ public class Mb_PoolManager : MonoBehaviour
     public void Awake()
     {
         PoolManager = this;
-
     }
 
     public void CallItem( Mb_Poolable.poolableTag objectType, Vector3 position, float Yrotation)
@@ -35,6 +34,11 @@ public class Mb_PoolManager : MonoBehaviour
             }
         }
 
+    }
+    public void DecallItem(Mb_Poolable itemToDepop)
+    {
+        itemToDepop.avaible = true;
+        itemToDepop.gameObject.SetActive(false);
     }
 }
 
